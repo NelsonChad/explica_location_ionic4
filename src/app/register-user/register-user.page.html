@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-icon name="book-outline"></ion-icon>
+    <ion-title>Registar Novo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="student" (click)="select()">
+        <ion-icon name="person-add-outline"></ion-icon>
+        <ion-label>Estudante</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="explainer" (click)="select()">
+        <ion-icon name="business-outline"></ion-icon>
+        <ion-label>Explicador</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+  <br><br><br>
+  <br>
+
+  <ion-card *ngIf="!selected">
+    <ion-item>
+      <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+      <ion-label>Selecione uma das Opções </ion-label>
+    </ion-item>
+
+    <ion-card-content>
+      Selecione Estudante para cadastrar'se como um <b>Estudante</b>
+      ou <b>Explicador</b> para cadastrar'se como Explicador
+    </ion-card-content>
+  </ion-card>
+</ion-content>

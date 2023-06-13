@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>login <ion-icon name="key"></ion-icon>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <mat-tab-group>
+    <!--SEGUNDO TAB ESTUDANTE-->
+    <mat-tab label="Estudante">
+      <ion-grid>
+        <ion-item lines="none" style="align-items: center">
+          <ion-avatar>
+            <img src="/assets/imgs/student.png">
+          </ion-avatar>
+        </ion-item>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+          <ion-item style="width: 90%;">
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item style="width: 90%;">
+            <ion-icon name="lock-open-outline" slot="start"></ion-icon>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <br>
+          <br>
+
+          <ion-button expand="full" type="submit" [disabled]="!loginForm.valid" color="danger">
+            LOGIN
+          </ion-button>
+          <br>
+        </form>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" shape="round">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button color="danger" expand="full" shape="round">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </mat-tab>
+
+
+    <!--SEGUNDO TAB EXPLICADOR-->
+    <mat-tab label="Explicador">
+      <ion-grid>
+        <ion-item lines="none" style="align-items: center">
+          <ion-avatar>
+            <img src="/assets/imgs/teacher.png">
+          </ion-avatar>
+        </ion-item>
+
+        <form [formGroup]="loginExplForm" (ngSubmit)="loginExplainer(loginExplForm.value)">
+          <ion-item style="width: 90%;">
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item style="width: 90%;">
+            <ion-icon name="lock-open-outline" slot="start"></ion-icon>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <br>
+          <br>
+
+          <ion-button expand="full" type="submit" [disabled]="!loginExplForm.valid" color="danger">
+            LOGIN
+          </ion-button>
+          <br>
+        </form>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" shape="round">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button color="danger" expand="full" shape="round">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </mat-tab>
+  </mat-tab-group>
+
+
+
+  <!--FORA DO TAB-->
+  <ion-button color="light" expand="full" shape="round" routerLink="/register-user" routerDirection="forward">
+    <small>registar</small>
+  </ion-button>
+
+
+</ion-content>

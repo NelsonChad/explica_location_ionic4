@@ -1,5 +1,7 @@
 {
   "name": "explica",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

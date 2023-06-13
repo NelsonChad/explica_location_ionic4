@@ -1,3 +1,82 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!--Meu Adicionado por mim-->
+  <ion-menu side="start" contentId="content1" menuId="custom" class="my-custom-menu">
+    <ion-header>
+      <!--<ion-toolbar color="tertiary" no-padding>-->
+      <ion-toolbar no-padding>
+        <ion-img src="/assets/imgs/learn.jpg"></ion-img>
+        <!--<ion-img src="/assets/icon/icon.png" class="logo" slot="end"></ion-img>-->
+
+        <ion-title slot="start" style="width: 400px; padding-inline-start: 15px;">
+          <ion-avatar *ngIf="!this.logued || !this.connected" (click)="closeMenu()" routerLink="/login"
+            routerDirection="forward"
+            style=" width:80px !important; height : 80px !important;  max-width: 80px; max-height: 80px;">
+            <img src="/assets/imgs/avatar.jpg">
+          </ion-avatar>
+          <ion-avatar *ngIf="this.logued" (click)="closeMenu()" routerLink="/user" routerDirection="forward"
+            style=" width:80px !important; height : 80px !important;  max-width: 80px; max-height: 80px;">
+            <img src="http://localhost/explica/public/uploads/avatars/{{ this.avatar }}">
+          </ion-avatar>
+          <ion-text *ngIf="this.logued">
+            <ion-badge color="light">{{ this.username }}</ion-badge>
+          </ion-text>
+          <ion-badge *ngIf="this.logued" (click)="presentAlertConfirm()">Logout</ion-badge>
+          <ion-button *ngIf="!this.logued" size="small" color="primary" (click)="closeMenu()" routerLink="/login"
+            routerDirection="forward">
+            Login</ion-button>
+
+        </ion-title>
+        <ion-item-divider *ngIf="type == 1">Estudante</ion-item-divider>
+        <ion-item-divider *ngIf="type == 2">Explicador</ion-item-divider>
+
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngIf="this.logued" no-padding>
+            <ion-button class="buttonBrev" disabled="true" style="height: 100px;" expand="full" color="primary"
+              routerLink="/cart" routerDirection="forward" (click)="closeMenu()">
+              <ion-icon name="briefcase-outline"></ion-icon>
+              <ion-badge color="warning"><small>brevem</small></ion-badge>
+            </ion-button>
+          </ion-col>
+
+          <ion-col *ngIf="this.logued" no-padding>
+            <ion-button style="height: 100px;" (click)="closeMenu()" expand="full" color="primary" routerLink="/my-ads"
+              routerDirection="forward">
+              <ion-icon name="notifications-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col no-padding>
+            <ion-button style="height: 100px;" expand="full" color="primary" routerLink="/settings"
+              routerDirection="forward">
+              <ion-icon size="large" slot="icon-only" name="settings"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col no-padding>
+            <ion-button style="height: 100px;" expand="full" color="primary" routerLink="/about"
+              routerDirection="forward">
+              <ion-icon size="large" slot="icon-only" name="help-circle"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col no-padding>
+            <ion-button style="height: 100px;" expand="full" color="primary" routerLink="/" routerDirection="forward">
+              <ion-icon size="large" slot="end" name="home"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="content1"></ion-router-outlet>
 </ion-app>

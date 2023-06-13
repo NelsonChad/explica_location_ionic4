@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Locais de Explicação</ion-title>
+    <ion-icon name="close-circle" style="font-size: 30px; margin-right: 10px;" slot="end" (click)="dismiss()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none">
+    <!--<ion-input placeholder="adicione o seu endereço" clearInput [(ngModel)]="user.address"></ion-input>-->
+    <ion-searchbar (ionChange)="searchItems($event)" placeholder="Search for a place"></ion-searchbar>
+  </ion-item>
+  <ion-list> 
+    <ion-item *ngFor="let item of this.locations" tappable (click)="SelectSearchResult(item)">
+      {{ item.name }} <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

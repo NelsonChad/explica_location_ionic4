@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="this.place">{{ this.place.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none">
+    <ion-avatar height="500px" width="500px">
+      <img src="https://img.icons8.com/nolan/96/school.png">
+    </ion-avatar>
+  </ion-item>
+  <ion-item-divider color="warning">
+    <ion-label *ngIf="this.place">
+      {{ this.place.slogan }}
+    </ion-label>
+  </ion-item-divider>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Informacoes pertinentes</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="this.place">
+      <ion-chip width="800px;">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Horário</ion-label>
+      </ion-chip>
+      <ion-label color="success">{{ this.place.open_time }}h-{{ this.place.close_time }}h</ion-label>
+      <br>
+      <ion-chip>
+        <ion-icon name="card-outline"></ion-icon>
+        <ion-label>Preço</ion-label>
+      </ion-chip>
+      <ion-label color="danger">Sob-orcamento</ion-label>
+      <br>
+      <ion-chip>
+        <ion-icon name="walk-outline"></ion-icon>
+        <ion-label>Distáncia</ion-label>
+      </ion-chip>
+      <ion-label color="success">-1km</ion-label>
+      <br>
+      <ion-chip>
+        <ion-icon name="mail"></ion-icon>
+        <ion-label>Email</ion-label>
+      </ion-chip>
+      <ion-label color="success">{{ this.place.email }}</ion-label>
+      <br>
+      <ion-chip *ngIf="this.contacts">
+        <ion-icon size="large" name="call-sharp"></ion-icon>
+        <ion-label>Contáctos</ion-label>
+      </ion-chip>
+      <ul style="list-style-type:square;" *ngIf="this.contacts">
+        <li *ngFor="let cont of this.contacts">+258 {{ cont.contact }}</li>
+      </ul>
+      <hr>
+
+      <ion-label><b>Outros:</b></ion-label><br>
+      <ion-text>{{ this.place.description }}</ion-text>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- List Header with Outline Button -->
+  <ion-list-header>
+    <ion-label>Lista de Disciplinas</ion-label>
+  </ion-list-header>
+  <!-- List of Input Items -->
+  <ion-list>
+    <ion-item *ngFor="let subj of this.subjects">
+      <ion-icon slot="start" name="book-outline"></ion-icon>
+      <ion-label>{{ subj.name }}</ion-label>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="request()">fazer inscrição</ion-button>
+</ion-content>

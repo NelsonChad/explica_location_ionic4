@@ -24,3 +24,16 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; // material
+
+/*Loading*/
+.loading-loader-class {
+    --background: url('/assets/bubbles.svg') no-repeat center center / cover;
+    --height: 100px;
+    --width: 200px;
+
+    .loading-wrapper {
+        box-shadow: none;
+    }
+}

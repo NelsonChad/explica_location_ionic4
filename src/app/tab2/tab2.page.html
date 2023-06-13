@@ -1,17 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" (onclick)="openCustom()"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Tab 2
+      Pedidos de inscrição
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-item-divider>Lista de pedidos (Opções deslize para esquerda)</ion-item-divider>
+  <ion-list>
+    <!-- Sliding item with icon end options on end side -->
+    <ion-item-sliding *ngFor="let enroll of this.enrollments">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="http://localhost/explica/public/uploads/avatars/{{ enroll.avatar }}">
+        </ion-avatar>
+        <ion-label>{{ enroll.name }}</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="success">
+          <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+          Aceitar
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="end" name="close-outline"></ion-icon>
+          Recusar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
 </ion-content>

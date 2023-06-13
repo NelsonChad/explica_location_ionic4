@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estudante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <form>
+
+    <ion-item-divider>
+      <ion-icon name="locate-outline"></ion-icon>
+      <ion-label>&nbsp; &nbsp; Localizacao: Maputo, Mahotas</ion-label>
+    </ion-item-divider>
+
+
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apelido</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Numero</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+     Expand --
+  <ion-button expand="full">Cadastrar</ion-button>
+  </form>-->
+
+  <form [formGroup]="studentForm" (ngSubmit)="studentAdd(studentForm.value)">
+
+    <ion-item-divider (click)="getLocation()">
+      <ion-icon name="locate-outline"></ion-icon>
+      <ion-label *ngIf="located==false">&nbsp; &nbsp; Obtendo sua localização</ion-label>
+      <ion-spinner *ngIf="located==false" class="spinner" name="dots"></ion-spinner>
+      <ion-label *ngIf="located && this.address != ''">&nbsp; &nbsp; {{ this.address }}</ion-label>
+    </ion-item-divider>
+
+    <mat-vertical-stepper>
+      <mat-step label="Conta">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div
+          *ngIf="studentForm.controls['email'].invalid && (studentForm.controls['email'].dirty || studentForm.controls['email'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="studentForm.controls['email'].errors.required">
+            <ion-badge color="danger" shape="round">
+              <ion-text>email is required.</ion-text>
+            </ion-badge>
+          </div>
+          <div *ngIf="studentForm.controls['email'].errors.pattern">
+            <ion-badge color="danger">
+              <ion-text>is not a email, type (exampe@exampe.com).</ion-text>
+            </ion-badge>
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <div
+          *ngIf="studentForm.controls['password'].invalid && (studentForm.controls['password'].dirty || studentForm.controls['password'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="studentForm.controls['password'].errors.required">
+            <ion-badge color="danger">
+              <ion-text>title is required.</ion-text>
+            </ion-badge>
+          </div>
+          <div *ngIf="studentForm.controls.password.errors.minlength">
+            <ion-badge color="danger">
+              <ion-text>title must be at least 6 characters long.</ion-text>
+            </ion-badge>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" mat-raised-button mat-button matStepperNext>proximo></button>
+        </div>
+      </mat-step>
+      <mat-step label="Outros detalhes">
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <div
+          *ngIf="studentForm.controls['name'].invalid && (studentForm.controls['name'].dirty || studentForm.controls['name'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="studentForm.controls['name'].errors.required">
+            <ion-badge color="danger">
+              <ion-text>O campo é obrigatório.</ion-text>
+            </ion-badge>
+          </div>
+        </div>
+
+
+        <ion-item>
+          <ion-label position="floating">Apelido</ion-label>
+          <ion-input formControlName="surname"></ion-input>
+        </ion-item>
+        <div
+          *ngIf="studentForm.controls['surname'].invalid && (studentForm.controls['surname'].dirty || studentForm.controls['surname'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="studentForm.controls['surname'].errors.required">
+            <ion-badge color="danger">
+              <ion-text>O campo é obrigatório.</ion-text>
+            </ion-badge>
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Numero</ion-label>
+          <ion-input formControlName="number"></ion-input>
+        </ion-item>
+        <div
+          *ngIf="studentForm.controls['number'].invalid && (studentForm.controls['number'].dirty || studentForm.controls['number'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="studentForm.controls['number'].errors.required">
+            <ion-badge color="danger">
+              <ion-text>contact is required.</ion-text>
+            </ion-badge>
+          </div>
+          <div *ngIf="studentForm.controls['number'].errors.pattern">
+            <ion-badge color="danger">
+              <ion-text>Enter e numeric value.</ion-text>
+            </ion-badge>
+          </div>
+          <div *ngIf="studentForm.controls['number'].errors.minlength">
+            <ion-badge color="danger">
+              <ion-text>at least 8 numbers.</ion-text>
+            </ion-badge>
+          </div>
+          <div *ngIf="studentForm.controls['number'].errors.maxlength">
+            <ion-badge color="danger">
+              <ion-text>max 9 numbers.</ion-text>
+            </ion-badge>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" mat-raised-button mat-button matStepperPrevious>voltar</button>
+          <button type="button" mat-raised-button mat-button matStepperNext>proximo</button>
+        </div>
+      </mat-step>
+
+      <mat-step label="Finalizar">
+        <ion-item-divider></ion-item-divider>
+        <br>
+        <div>
+          <button type="button" mat-raised-button mat-button matStepperPrevious>voltar</button>
+        </div>
+        <ion-label color="danger" *ngIf="!studentForm.valid" text-wrap>
+          <small>Para poder prosseguir tem que preecher todos os campos marcados como abrigatorios.</small>
+        </ion-label>
+        <ion-button type="submit" [disabled]="!studentForm.valid" expand="full" color="danger">
+          Cadastrar
+          <ion-icon slot="end" size="large" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </mat-step>
+    </mat-vertical-stepper>
+
+
+
+    <!-- Expand >
+    <ion-button-- expand="full">Cadastrar</ion-button-->
+  </form>
+
+</ion-content>

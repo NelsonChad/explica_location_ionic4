@@ -1,17 +1,75 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" (onclick)="openCustom()"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Tab 1
+      Mapa
+      <ion-icon color="success" name="location-outline"></ion-icon>
+      <ion-badge color="success" (click)="presentModal()">Locais</ion-badge>
+      <ion-icon color="secondary" name="pin-outline"></ion-icon>
+      <ion-badge color="secondary">Você</ion-badge>
     </ion-title>
+    <ion-icon name="search-outline" (click)="presentModal()" style="font-size: 30px; margin-right: 10px;" slot="end"></ion-icon>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
+  <!--div id="map" style="width: 100%;  height: 92%;"></div-->
+  <div id="map" style="width: 100%;  height: 90%;"></div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card *ngIf="this.selectRoute" no-padding style="z-index: 1;">
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>ion-item in a card, icon left, button right</ion-label>
+      <ion-button fill="outline" slot="end">
+        <ion-icon name="trending-up-outline"></ion-icon>
+        Rota
+      </ion-button>
+    </ion-item>
+
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-row *ngIf="this.tracking">
+    <ion-col size="3">
+      <ion-icon class="foo" name="walk-outline"></ion-icon>
+      <ion-spinner class="spinner" name="dots"></ion-spinner>
+    </ion-col>
+    <ion-col size="9">
+      <ion-button expand="full" [disabled]="!this.tracking" (click)="this.stopTracking()" color="danger">Parar
+        <ion-icon slot="start" name="hand-left-outline"></ion-icon>
+        Rastreio
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="!this.tracking">
+    <ion-col size="4">
+      <ion-icon class="foo" name="man-outline"></ion-icon>
+      <ion-spinner class="spinner" name="crescent"></ion-spinner>
+    </ion-col>
+    <ion-col size="8">
+      <ion-button expand="full" [disabled]="this.tracking" (click)="this.restartTracking()" color="success">Iniciar
+        <ion-icon slot="start" name="trending-up-outline"></ion-icon>
+        Trastreio
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+
+
+
+
+  <!--ion-button expand="full" *ngIf="this.tracking" [disabled]="!this.tracking" (click)="this.stopTracking()"
+    color="primary">Parar Rastreio
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-button>
+  <ion-button expand="full" *ngIf="!this.tracking" [disabled]="this.tracking" (click)="this.restartTracking()"
+    color="danger">Iniciar Trastreio
+  </ion-button-->
 </ion-content>
